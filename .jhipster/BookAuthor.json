@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "bookId",
+            "otherEntityName": "book",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "authorId",
+            "otherEntityName": "author",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20181114110638",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "book_author",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

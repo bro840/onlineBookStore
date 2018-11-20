@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-book-author-heading">Create or edit a Book Author</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!bookAuthor.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="bookAuthor.id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bookId">Book Id</label>
+                    <select class="form-control" id="field_bookId" name="bookId" [(ngModel)]="bookAuthor.bookId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="bookOption.id === bookAuthor.bookId?.id ? bookAuthor.bookId : bookOption" *ngFor="let bookOption of books; trackBy: trackBookById">{{bookOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_authorId">Author Id</label>
+                    <select class="form-control" id="field_authorId" name="authorId" [(ngModel)]="bookAuthor.authorId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="authorOption.id === bookAuthor.authorId?.id ? bookAuthor.authorId : authorOption" *ngFor="let authorOption of authors; trackBy: trackAuthorById">{{authorOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

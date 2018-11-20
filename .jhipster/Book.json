@@ -1,0 +1,54 @@
+{
+    "name": "Book",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isbn",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "saleDetails",
+            "otherEntityName": "saleDetails",
+            "otherEntityRelationshipName": "book"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "author",
+            "otherEntityName": "author",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "genre",
+            "otherEntityName": "genre",
+            "otherEntityField": "name",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181110141310",
+    "entityTableName": "book",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

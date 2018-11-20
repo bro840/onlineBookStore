@@ -1,0 +1,37 @@
+enum Country {
+	Portugual, Spain, Italy, England, France, Germany
+}
+entity Author {
+	name		String,
+    country		Country
+}
+entity Genre {
+	name		String
+}
+entity Book {
+	title		String,
+    isbn		String,
+    quantity	Integer,
+    price		Double
+}
+
+
+entity Sale {
+	date 		LocalDate
+}
+entity SaleDetails {
+	quantity	Integer
+}
+
+
+relationship ManyToMany {
+	Book{author(name)} 		to		Author,
+    Book{genre(name)}		to 		Genre,
+}
+relationship OneToMany {
+    Sale					to		SaleDetails,
+    Book					to		SaleDetails	{book(title)}
+}
+relationship ManyToOne {
+	Sale{user(email)}		to 		User
+}

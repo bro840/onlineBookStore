@@ -1,0 +1,34 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.readinessit.bookstore"
+    },
+    "jhipsterVersion": "5.5.0",
+    "applicationType": "monolith",
+    "baseName": "bookStore",
+    "packageName": "com.readinessit.bookstore",
+    "packageFolder": "com/readinessit/bookstore",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZTc1ODg2YTAwODBjNDg5YWI3MGQ3NjVhZTcwN2I3YWNkNzI0MzUzN2ZlMDU3Njg0MDY0N2E4OWJiNDI0MWE3NzIyNDNlNmFjYmY3ZGNhZTU4NTEwYzIyNmVlOGVlZTljYjViNWUwYjgxYTM2YTgxYjNkYTc2OTBlZmU3MzE0ZDc=",
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "enableTranslation": false
+  }
+}

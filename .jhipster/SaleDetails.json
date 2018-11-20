@@ -1,0 +1,32 @@
+{
+    "name": "SaleDetails",
+    "fields": [
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "sale",
+            "otherEntityName": "sale",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "book",
+            "otherEntityName": "book",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20181110141312",
+    "entityTableName": "sale_details",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

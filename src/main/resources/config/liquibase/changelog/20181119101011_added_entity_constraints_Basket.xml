@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Basket.
+    -->
+    <changeSet id="20181110141312-2" author="bro">
+        
+
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="basket"
+                                 constraintName="fk_basket_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        <addForeignKeyConstraint baseColumnNames="book_id"
+                                 baseTableName="basket"
+                                 constraintName="fk_basket_book_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="book"/>
+
+    </changeSet>
+</databaseChangeLog>
