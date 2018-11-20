@@ -12,6 +12,7 @@ import com.readinessit.bookstore.service.SaleDetailsService;
 import com.readinessit.bookstore.service.SaleService;
 import com.readinessit.bookstore.service.UserService;
 import com.readinessit.bookstore.web.rest.errors.BadRequestAlertException;
+import com.readinessit.bookstore.web.rest.errors.ForbiddenActionAlertException;
 import com.readinessit.bookstore.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -112,13 +113,13 @@ public class SaleDetailsResource {
         }
 
 
-        // validate if the user trying to create sale_details is the same of the sale table
+        // validates if the user trying to create sale_details is the same of the sale table
         if(!saleService.isLoggedUserTheOwner(saleDetails.getSale().getId())) {
             throw new BadRequestAlertException("You have not permission to create Sales_Details on the provided Sale" , ENTITY_NAME, "You have not permission to create Sales_Details on the provided Sale");
         }
 
 
-        // validate if the sale is not truncate
+        // validates if the sale is not truncate
         if(saleService.isSaleTruncate(saleDetails.getSale().getId()) == null || saleService.isSaleTruncate(saleDetails.getSale().getId())) {
             throw new BadRequestAlertException("The provided Sale is truncated" , ENTITY_NAME, "The provided Sale is truncated");
         }
@@ -145,6 +146,12 @@ public class SaleDetailsResource {
     public ResponseEntity<Void> deleteSaleDetails(@PathVariable Long id) {
 
         log.debug("REST request to delete SaleDetails : {}", id);
+
+
+        // validates if logged user has the required admin privilege to this action
+        if(!userService.isAdmin()) {
+            throw new ForbiddenActionAlertException("Forbidden action", ENTITY_NAME, "You are not allowed to delete Sale_Details");
+        }
 
 
         // gets saleDetails object from database.
