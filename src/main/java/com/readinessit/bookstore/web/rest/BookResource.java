@@ -1,8 +1,12 @@
 package com.readinessit.bookstore.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.readinessit.bookstore.domain.Author;
 import com.readinessit.bookstore.domain.Book;
+import com.readinessit.bookstore.domain.Genre;
+import com.readinessit.bookstore.repository.AuthorRepository;
 import com.readinessit.bookstore.repository.BookRepository;
+import com.readinessit.bookstore.repository.GenreRepository;
 import com.readinessit.bookstore.repository.SaleDetailsRepository;
 import com.readinessit.bookstore.service.BookService;
 import com.readinessit.bookstore.service.UserService;
@@ -21,8 +25,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Book.
@@ -43,6 +49,10 @@ public class BookResource {
     private UserService userService;
     @Autowired
     private SaleDetailsRepository saleDetailsRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+    @Autowired
+    private GenreRepository genreRepository;
 
 
 
@@ -113,7 +123,24 @@ public class BookResource {
             throw new BadRequestAlertException(bookService.getBookErrors(book) , ENTITY_NAME, bookService.getBookErrors(book));
         }
 
+
+        // saves
         Book result = bookRepository.save(book);
+
+        // gets authors
+        Set<Author> auths = new HashSet<>();
+        for(Author author : result.getAuthors()) {
+            auths.add(authorRepository.findById(author.getId()).get());
+        }
+        result.setAuthors(auths);
+
+        // gets genres
+        Set<Genre> genres = new HashSet<>();
+        for(Genre genre : result.getGenres()) {
+            genres.add(genreRepository.findById(genre.getId()).get());
+        }
+        result.setGenres(genres);
+
         return ResponseEntity.created(new URI("/api/books/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

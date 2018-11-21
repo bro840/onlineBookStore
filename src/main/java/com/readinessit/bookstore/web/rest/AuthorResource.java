@@ -106,9 +106,14 @@ public class AuthorResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
 
+        // validate if id exists in the database
+        if(!authorRepository.findById(author.getId()).isPresent()) {
+            throw new BadRequestAlertException("Author id does not match any database Author id" , ENTITY_NAME, "Author id does not match any database Author id");
+        }
+
         // validates if author fields respects business logic
         if(!authorService.isAuthorValidWithId(author)) {
-            throw new BadRequestAlertException(authorService.getAuthorErrorsWithId(author)  , ENTITY_NAME, authorService.getAuthorErrors(author) );
+            throw new BadRequestAlertException(authorService.getAuthorErrorsWithId(author)  , ENTITY_NAME, authorService.getAuthorErrors(author));
         }
 
 

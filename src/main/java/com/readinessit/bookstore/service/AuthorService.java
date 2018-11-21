@@ -52,9 +52,7 @@ public class AuthorService {
         else if(author.getName().length() > 50) {
             return false;
         }
-        else if(authorRepository.findByName(author.getName()) != null) {
-            return false;
-        }
+
 
         return true;
     }
@@ -104,9 +102,7 @@ public class AuthorService {
         else if(author.getName().length() > 50) {
             return "Author name max length: 50";
         }
-        else if(authorRepository.findByName(author.getName()) != null) {
-            return "Author name already exists";
-        }
+
 
         return null;
     }
