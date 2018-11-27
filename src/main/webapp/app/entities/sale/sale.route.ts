@@ -30,7 +30,7 @@ export const saleRoute: Routes = [
         path: 'sale',
         component: SaleComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Sales'
         },
         canActivate: [UserRouteAccessService]
@@ -42,7 +42,7 @@ export const saleRoute: Routes = [
             sale: SaleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Sales'
         },
         canActivate: [UserRouteAccessService]
@@ -54,7 +54,7 @@ export const saleRoute: Routes = [
             sale: SaleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Sales'
         },
         canActivate: [UserRouteAccessService]
@@ -66,7 +66,7 @@ export const saleRoute: Routes = [
             sale: SaleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Sales'
         },
         canActivate: [UserRouteAccessService]
@@ -81,7 +81,7 @@ export const salePopupRoute: Routes = [
             sale: SaleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Sales'
         },
         canActivate: [UserRouteAccessService],

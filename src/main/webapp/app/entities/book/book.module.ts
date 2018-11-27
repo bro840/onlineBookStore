@@ -11,12 +11,13 @@ import {
     bookRoute,
     bookPopupRoute
 } from './';
+import { BookSearchComponent } from './book-search/book-search.component';
 
 const ENTITY_STATES = [...bookRoute, ...bookPopupRoute];
 
 @NgModule({
     imports: [BookStoreSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [BookComponent, BookDetailComponent, BookUpdateComponent, BookDeleteDialogComponent, BookDeletePopupComponent],
+    declarations: [BookComponent, BookDetailComponent, BookUpdateComponent, BookDeleteDialogComponent, BookDeletePopupComponent, BookSearchComponent],
     entryComponents: [BookComponent, BookUpdateComponent, BookDeleteDialogComponent, BookDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

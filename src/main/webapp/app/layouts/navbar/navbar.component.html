@@ -1,16 +1,22 @@
 <nav class="navbar navbar-dark navbar-expand-md jh-navbar">
+
     <div class="jh-logo-container float-left">
         <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
             <fa-icon [icon]="'bars'"></fa-icon>
         </a>
         <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
-            <span class="logo-img"></span>
-            <span class="navbar-title">BookStore</span> <span class="navbar-version">{{version}}</span>
+            <img src="../../../content/images/onlineBookStoreIcon.png" width="50px;">
+            <span class="navbar-title">Online Book Store</span>
         </a>
     </div>
+
+    <!-- Se user estver autenticado -->
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
+
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+            <!-- home -->
+            <li class="nav-item"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
                         <fa-icon [icon]="'home'"></fa-icon>
@@ -18,56 +24,72 @@
                     </span>
                 </a>
             </li>
-            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                    <span>
-                        <fa-icon [icon]="'th-list'"></fa-icon>
+
+            <!-- User Books -->
+            <ng-container *ngIf="!isAdmin()">
+                <li class="nav-item" *ngSwitchCase="true" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="books">
                         <span>
-                            Entities
+                            <fa-icon [icon]="'book'"></fa-icon>
+                            <span>Books</span>
                         </span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li>
-                        <a class="dropdown-item" routerLink="author" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span>Author</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="genre" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span>Genre</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="book" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span>Book</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="sale" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span>Sale</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="sale-details" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span>Sale Details</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="book-author" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span>Book Author</span>
-                        </a>
-                    </li>
-                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                </ul>
-            </li>
+                    </a>
+                </li>
+            </ng-container>
+
+            <ng-container *ngIf="isAdmin()">
+                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+                <li  *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                        <span>
+                            <fa-icon [icon]="'th-list'"></fa-icon>
+                            <span>
+                                Entities
+                            </span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li>
+                            <a class="dropdown-item" routerLink="author" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span>Author</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="genre" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span>Genre</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="book" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span>Book</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="sale" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span>Sale</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="sale-details" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span>Sale Details</span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a class="dropdown-item" routerLink="book-author" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span>Book Author</span>
+                            </a>
+                        </li> -->
+                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                    </ul>
+                </li>
+            </ng-container>
+
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>

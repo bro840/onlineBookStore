@@ -62,4 +62,8 @@ export class NavbarComponent implements OnInit {
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
+
+    isAdmin() : boolean {
+         return this.principal.hasAnyAuthorityDirect(["ROLE_ADMIN"]);
+    }
 }

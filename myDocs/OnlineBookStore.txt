@@ -1,0 +1,40 @@
+
+	- Authors / Genres
+		-> Create/Update/Delete apenas admins
+		-> Pesquisar por author name
+		-> Valida se campos null, length e data type
+		-> Valida se são dependências na tabela Book_Genre e Book_Author antes de apagar
+
+	
+	- Book
+		-> Create/Update/Delete apenas admins
+		-> Pesquisa por title
+		-> Valida se campos null, length e data type
+		-> Valida se ISBN é válido e se já existe na BD(desactivado por simplicidade de inserts)
+		-> Tem de ter pelo menos um Author e um Genre associado
+		-> Valida se é uma dependência na tabela Sale_Details antes de apagar
+		   Se for possível apagar, apaga também Book_Genres, Book_Authors e Basket.
+
+
+	- Sale
+		-> User pode criar Sales
+		-> Só Admin pode realizar deletes de Sales
+		-> Valida se campos null, length e data type
+		-> Valida se data igual à data de hoje
+		-> Valida se é uma dependência na tabela Sale_Details antes de apagar
+		   enquanto existirem sale_details para uma determinada sale, não apaga a sale
+		-> Tem um campo "truncate" que serve como flag que indica que uma venda já não pode ter mais nenhuma sal_detail
+	
+
+	- Sale_Details
+	 	-> User pode criar Sale_Details
+		-> Só Admin pode realizar deletes de Sale_Details
+		-> Os deletes repôem a quantidade vendida em Sale_Details na tabela Book
+		-> Valida se campos null, length e data type
+		-> Valida se a quantidade de livros que o user quer comprar é superior à quantidade disponivel
+		-> Retira da tabela Book a quantidade comprada
+		-> Valida se os Ids dos Books são ids exstentes
+		-> Valida se o user está a criar uma Sale_Detail para uma venda de ele mesmo
+		-> Valida se a Sale "mãe" está trancada, se estiver (true) não pode criar Sale_Details para essa Sale
+
+		

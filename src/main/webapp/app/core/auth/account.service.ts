@@ -15,4 +15,10 @@ export class AccountService {
     save(account: any): Observable<HttpResponse<any>> {
         return this.http.post(SERVER_API_URL + 'api/account', account, { observe: 'response' });
     }
+
+    getUserId(): void {
+        this.get().subscribe(res => {
+            return res.body.id;
+        });
+    }
 }

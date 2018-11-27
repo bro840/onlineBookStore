@@ -30,7 +30,7 @@ export const genreRoute: Routes = [
         path: 'genre',
         component: GenreComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Genres'
         },
         canActivate: [UserRouteAccessService]
@@ -54,7 +54,7 @@ export const genreRoute: Routes = [
             genre: GenreResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Genres'
         },
         canActivate: [UserRouteAccessService]
@@ -66,7 +66,7 @@ export const genreRoute: Routes = [
             genre: GenreResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Genres'
         },
         canActivate: [UserRouteAccessService]
@@ -81,7 +81,7 @@ export const genrePopupRoute: Routes = [
             genre: GenreResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Genres'
         },
         canActivate: [UserRouteAccessService],

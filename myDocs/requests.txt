@@ -1,0 +1,27 @@
+
+	author
+		{
+			"name" : "Bruno Ferreira",
+			"country" : "Portugal"
+		}
+
+	genre
+		{
+			"name" : "Bruno Ferreira"
+		}
+
+	book
+		{
+			"title" : "era uma vez",
+			"isbn"  : "9780141985411",
+			"quantity" : 12,
+			"price" : 99,
+			"authors" : { "id": 4 },
+			"genres" : { "id": 4 }			
+		}
+
+	sale	
+		{
+			"date" : "2018-11-21"
+			"user" : { "id" : 2 }
+		}

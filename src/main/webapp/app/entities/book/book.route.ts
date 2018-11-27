@@ -1,3 +1,4 @@
+import { BookSearchComponent } from './book-search/book-search.component';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
@@ -30,7 +31,7 @@ export const bookRoute: Routes = [
         path: 'book',
         component: BookComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Books'
         },
         canActivate: [UserRouteAccessService]
@@ -54,7 +55,7 @@ export const bookRoute: Routes = [
             book: BookResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Books'
         },
         canActivate: [UserRouteAccessService]
@@ -66,8 +67,20 @@ export const bookRoute: Routes = [
             book: BookResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Books'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'books',
+        component: BookSearchComponent,
+        resolve: {
+            book: BookResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'Books Search'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -81,7 +94,7 @@ export const bookPopupRoute: Routes = [
             book: BookResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Books'
         },
         canActivate: [UserRouteAccessService],

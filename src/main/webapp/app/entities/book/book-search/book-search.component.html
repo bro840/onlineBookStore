@@ -1,0 +1,55 @@
+<div class="p-4 mb-5 rounded border border-dark" style="background-color: #dededa;">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <h1 class="input-group-text bg-dark text-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Search by title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+        </div>
+
+        <input  #bookTitle
+                type="text"
+                class="form-control"
+                (keyup)="searchBookByTitle(bookTitle.value)">
+    </div>
+</div>
+
+<table class="table ">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>ISBN</th>
+            <th>Authors</th>
+            <th>Genres</th>
+            <th>Available Un.</th>
+            <th>Price</th>
+            <th>Wish List</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books; even as isEven" [style.background-color]="isEven ? '#ddd' : '#eee'">
+            <td>
+                <a [routerLink]="['/book', book.id, 'view' ]">{{ book.title }}</a>
+            </td>
+            <td>
+                {{ book.isbn }}
+            </td>
+            <td>
+               <span *ngFor="let author of book.authors; last as isLast">
+                    {{ isLast ? author.name : author.name + ", " }}
+               </span>
+            </td>
+            <td>
+                <span *ngFor="let genre of book.genres; last as isLast">
+                    {{ isLast ? genre.name : genre.name + ", " }}
+                </span>
+            </td>
+            <td>
+                {{ book.quantity }}
+            </td>
+            <td>
+                {{ book.price | currency:'EUR':'symbol' }}
+            </td>
+            <td class="text-center">
+                <input type="checkbox"> 
+            </td>
+        </tr>
+    </tbody>
+</table>

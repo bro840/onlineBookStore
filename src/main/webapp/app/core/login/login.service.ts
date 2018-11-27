@@ -5,6 +5,9 @@ import { AuthServerProvider } from '../auth/auth-jwt.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
+
+    userId: number;
+
     constructor(private principal: Principal, private authServerProvider: AuthServerProvider) {}
 
     login(credentials, callback?) {

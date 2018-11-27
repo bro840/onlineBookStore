@@ -69,7 +69,6 @@ public class BookResource {
 
         log.debug("REST request to get all Books");
 
-
         if(title != null && !title.isEmpty()) {
             return bookRepository.findByTitleContainingIgnoreCase(title);
         }
