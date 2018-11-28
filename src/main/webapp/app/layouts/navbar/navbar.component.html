@@ -37,6 +37,17 @@
                 </li>
             </ng-container>
 
+             <!-- User Basket -->
+             <ng-container *ngIf="!isAdmin()">
+                <li class="nav-item" *ngSwitchCase="true" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="basket">
+                        <span>
+                            <jhi-basket-icon></jhi-basket-icon>
+                        </span>
+                    </a>
+                </li>
+            </ng-container>
+
             <ng-container *ngIf="isAdmin()">
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
                 <li  *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">

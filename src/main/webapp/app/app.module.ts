@@ -20,6 +20,7 @@ import { BookStoreEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { BasketIconComponent } from './layouts/navbar/basket-icon/basket-icon.component';
 
 @NgModule({
     imports: [
@@ -33,7 +34,7 @@ import { JhiMainComponent, NavbarComponent, PageRibbonComponent, ErrorComponent 
         // jhipster-needle-angular-add-module JHipster will add new module here
         BookStoreEntityModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, BasketIconComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

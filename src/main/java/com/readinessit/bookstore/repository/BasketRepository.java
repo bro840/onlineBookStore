@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
-
+import java.util.List;
 
 
 /**
@@ -21,4 +21,9 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     @Transactional
     @Query(value = "delete from basket where book_id = ?1", nativeQuery = true)
     void deleteByBookId(long bookId);
+
+    @Query(value = "select * from basket where user_id = ?1", nativeQuery = true)
+    List<Basket> findByUserId(long userId);
+
+
 }

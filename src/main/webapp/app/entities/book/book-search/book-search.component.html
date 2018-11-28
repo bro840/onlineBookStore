@@ -20,7 +20,7 @@
             <th>Genres</th>
             <th>Available Un.</th>
             <th>Price</th>
-            <th>Wish List</th>
+            <th class="text-center">Wish List</th>
         </tr>
     </thead>
     <tbody>
@@ -48,7 +48,23 @@
                 {{ book.price | currency:'EUR':'symbol' }}
             </td>
             <td class="text-center">
-                <input type="checkbox"> 
+                <span
+                    (click)="removeBookFromBasket(book.id)"
+                    class="text-danger"
+                    style="cursor:pointer"
+                    *ngIf="isBookInBasket(book.id); else addToBasket">
+                    <fa-icon [icon]="'cart-arrow-down'"></fa-icon>
+                </span>
+
+                <ng-template #addToBasket>
+                    <span
+                        (click)="addBookToBasket(book.id)"
+                        class="text-success"
+                        style="cursor:pointer">
+                        <fa-icon [icon]="'cart-plus'"></fa-icon>
+                    </span>
+                </ng-template>
+
             </td>
         </tr>
     </tbody>

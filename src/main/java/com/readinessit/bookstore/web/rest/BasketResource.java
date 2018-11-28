@@ -42,5 +42,18 @@ public class BasketResource {
     }
 
 
+    @GetMapping("/baskets/user/{id}")
+    @Timed
+    public List<Basket> getByUser(@PathVariable Long id){
+        return basketRepository.findByUserId(id);
+    }
+
+
+    @DeleteMapping("/baskets/{id}")
+    @Timed
+    public ResponseEntity<Void> removeBasket(@PathVariable Long id) {
+        basketRepository.deleteById(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
 
 }

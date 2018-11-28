@@ -1,7 +1,9 @@
+import { Basket } from './shared/model/basket.model';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from './layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { UserRouteAccessService } from './core';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
