@@ -19,7 +19,7 @@
             <li class="nav-item"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
-                        <fa-icon [icon]="'home'"></fa-icon>
+                        <fa-icon [icon]="'home'" size="lg"></fa-icon>
                         <span>Home</span>
                     </span>
                 </a>
@@ -30,7 +30,7 @@
                 <li class="nav-item" *ngSwitchCase="true" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <a class="nav-link" routerLink="books">
                         <span>
-                            <fa-icon [icon]="'book'"></fa-icon>
+                            <fa-icon [icon]="'book'" size="lg"></fa-icon>
                             <span>Books</span>
                         </span>
                     </a>
@@ -53,7 +53,7 @@
                 <li  *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                         <span>
-                            <fa-icon [icon]="'th-list'"></fa-icon>
+                            <fa-icon [icon]="'th-list'" size="lg"></fa-icon>
                             <span>
                                 Entities
                             </span>
@@ -104,7 +104,7 @@
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
-                        <fa-icon [icon]="'user-plus'"></fa-icon>
+                        <fa-icon [icon]="'user-plus'" size="lg"></fa-icon>
                         <span>Administration</span>
                     </span>
                 </a>
@@ -163,7 +163,7 @@
             <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
-                    <fa-icon [icon]="'user'"></fa-icon>
+                    <fa-icon [icon]="'user'"  size="lg"></fa-icon>
                     <span>
                       Account
                     </span>

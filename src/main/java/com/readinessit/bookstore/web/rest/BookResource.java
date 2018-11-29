@@ -65,13 +65,27 @@ public class BookResource {
     @GetMapping("/books")
     @Timed
     public List<Book> getAllBooks( @RequestParam(required = false, defaultValue = "false") boolean eagerload,
-                                   @RequestParam(name = "title", required = false, defaultValue = "") String title) {
+                                   @RequestParam(name = "title", required = false, defaultValue = "") String title,
+                                   @RequestParam(name = "author", required = false, defaultValue = "") String author) {
 
         log.debug("REST request to get all Books");
 
-        if(title != null && !title.isEmpty()) {
+
+        // title and no author
+        if(!title.isEmpty() && author.isEmpty()) {
             return bookRepository.findByTitleContainingIgnoreCase(title);
         }
+        // no title and author
+        else if(title.isEmpty() && !author.isEmpty()) {
+            return bookRepository.findByAuthorNameContainingIgnoreCase(author.toLowerCase());
+        }
+        // title and author
+        else if(!title.isEmpty() && !author.isEmpty()) {
+            return bookRepository.findByTitleAndByAuthorNameContainingIgnoreCase(title.toLowerCase(), author.toLowerCase());
+        }
+
+
+        // no parameters -> get all books
         return bookRepository.findAllWithEagerRelationships();
     }
 

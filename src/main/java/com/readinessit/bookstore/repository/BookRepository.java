@@ -30,6 +30,22 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByTitleContainingIgnoreCase(String title);
 
-    boolean existsByIsbn(String isnb);
+    @Query(value =  "select * from book " +
+                    "inner join book_author on book.id = book_author.books_id " +
+                    "inner join author on book_author.authors_id = author.id " +
+                    "where LOWER(author.name) like %?1%", nativeQuery = true)
+    List<Book> findByAuthorNameContainingIgnoreCase(String authorName);
 
+
+
+    @Query(value =  "select * from book " +
+        "inner join book_author on book.id = book_author.books_id " +
+        "inner join author on book_author.authors_id = author.id " +
+        "where LOWER(title) like %?1% " +
+        "and   LOWER(author.name) like %?2%", nativeQuery = true)
+    List<Book> findByTitleAndByAuthorNameContainingIgnoreCase(String title, String author);
+
+
+
+    boolean existsByIsbn(String isnb);
 }

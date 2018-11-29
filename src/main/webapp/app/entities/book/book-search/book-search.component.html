@@ -1,5 +1,8 @@
-<div class="p-4 mb-5 rounded border border-dark" style="background-color: #dededa;">
-    <div class="input-group">
+<!-- search bar -->
+<div class="row p-4 m-0 mb-5 rounded border border-dark" style="background-color: #dededa;">
+
+    <!-- by title -->
+    <div class="col-md-6 input-group">
         <div class="input-group-prepend">
             <h1 class="input-group-text bg-dark text-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Search by title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
         </div>
@@ -7,7 +10,23 @@
         <input  #bookTitle
                 type="text"
                 class="form-control"
-                (keyup)="searchBookByTitle(bookTitle.value)">
+                (keyup)="bookSearch(bookTitle.value, authorName.value)">
+    </div>
+
+    <!-- by author -->
+    <div class="col-md-6 input-group">
+        <div class="input-group-prepend">
+            <h1 class="input-group-text bg-dark text-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Search by author &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+        </div>
+        <select #authorName
+                class="form-control"
+                (change)="bookSearch(bookTitle.value, authorName.value)">
+            <option value=""></option>
+            <option
+                    *ngFor="let author of authors"
+                    value={{author.name}}>{{author.name}}
+            </option>
+        </select>
     </div>
 </div>
 
@@ -20,7 +39,7 @@
             <th>Genres</th>
             <th>Available Un.</th>
             <th>Price</th>
-            <th class="text-center">Wish List</th>
+            <th class="text-center">Basket</th>
         </tr>
     </thead>
     <tbody>
@@ -49,20 +68,26 @@
             </td>
             <td class="text-center">
                 <span
+                    *ngIf="isBookInBasket(book.id); else addToBasket"
                     (click)="removeBookFromBasket(book.id)"
                     class="text-danger"
                     style="cursor:pointer"
-                    *ngIf="isBookInBasket(book.id); else addToBasket">
-                    <fa-icon [icon]="'cart-arrow-down'"></fa-icon>
+                    title="Remove from basket">
+                    <fa-icon [icon]="'cart-arrow-down'" size="lg"></fa-icon>
                 </span>
 
                 <ng-template #addToBasket>
-                    <span
+                    <span *ngIf="book.quantity > 0; else outOfstock"
                         (click)="addBookToBasket(book.id)"
                         class="text-success"
-                        style="cursor:pointer">
-                        <fa-icon [icon]="'cart-plus'"></fa-icon>
+                        style="cursor:pointer"
+                        title="Add to basket">
+                        <fa-icon [icon]="'cart-plus'" size="lg"></fa-icon>
                     </span>
+
+                    <ng-template #outOfstock>
+                        <span class="text-warning font-weight-bold">Out of stock</span>
+                    </ng-template>
                 </ng-template>
 
             </td>
