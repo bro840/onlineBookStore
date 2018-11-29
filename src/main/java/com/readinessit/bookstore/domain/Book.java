@@ -39,6 +39,9 @@ public class Book implements Serializable {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "img")
+    private String img;
+
 
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
@@ -192,6 +195,15 @@ public class Book implements Serializable {
         this.genres = genres;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     @Override
     public boolean equals(Object o) {

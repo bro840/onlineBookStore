@@ -43,10 +43,14 @@ import {
     faMinus,
     faShoppingBasket,
     faCartArrowDown,
-    faCartPlus
+    faCartPlus,
+    faTh,
+    faAlignJustify
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
+library.add(faAlignJustify);
+library.add(faTh);
 library.add(faShoppingBasket);
 library.add(faCartArrowDown);
 library.add(faCartPlus);

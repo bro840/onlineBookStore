@@ -11,12 +11,13 @@ import { AuthorService } from 'app/entities/author';
 @Component({
     selector: 'jhi-book-search',
     templateUrl: './book-search.component.html',
-    styles: []
+    styleUrls: ["./book-search.component.css"]
 })
 export class BookSearchComponent implements OnInit {
 
+    private listStyle: boolean = false;
     private userId: number;
-    private books;
+    private books: Array<Book> = new Array<Book>();
     private authors: Array<Author> = new Array<Author>();
     private basket: Array<Basket> = new Array<Basket>();
 
@@ -73,7 +74,7 @@ export class BookSearchComponent implements OnInit {
 
 
 
-    //
+    // array methods
     isBookInBasket(bookId: number): boolean {
         return this.basket.find(x => x.book_id === bookId) == null ? false : true;
     }
@@ -101,5 +102,26 @@ export class BookSearchComponent implements OnInit {
 
             this.basketService.basketItemRemoved();
         });
+    }
+
+
+    // img url method
+    generateUrl(bookImg?: string): string {
+
+        if(bookImg == null) {
+            return "../../../../content/images/book.png";
+        }
+
+        return "../../../../content/images/" + bookImg;
+    }
+
+
+
+    // list style methods
+    toggleListStyleBlock() {
+        this.listStyle = false;
+    }
+    toggleListStyleList() {
+        this.listStyle = true;
     }
 }

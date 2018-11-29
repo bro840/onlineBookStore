@@ -1,39 +1,46 @@
-<!-- search bar -->
-<div class="row p-4 m-0 mb-5 rounded border border-dark" style="background-color: #dededa;">
+<!-- books bar -->
+<div class="row pt-4 pb-4 m-0 mb-4 rounded bg-dark">
+
+    <div class="col-md-2 pl-4 text-white text-center d-flex align-items-center justify-content-center">
+        <fa-icon (click)="toggleListStyleBlock()" class="mr-3" [ngStyle]="{'color': listStyle ? 'white' : '#17a2b8' }"
+            [icon]="'th'" size="2x">
+        </fa-icon>
+
+        <fa-icon (click)="toggleListStyleList()" class="ml-3" [ngStyle]="{'color': !listStyle ? 'white' : '#17a2b8' }"
+            [icon]="'align-justify'" size="2x">
+        </fa-icon>
+    </div>
+
 
     <!-- by title -->
-    <div class="col-md-6 input-group">
+    <div class="col-md-5 input-group">
         <div class="input-group-prepend">
-            <h1 class="input-group-text bg-dark text-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Search by title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            <h1 class="input-group-text bg-info text-light">By title</h1>
         </div>
 
-        <input  #bookTitle
-                type="text"
-                class="form-control"
-                (keyup)="bookSearch(bookTitle.value, authorName.value)">
+        <input #bookTitle type="text" class="form-control" (keyup)="bookSearch(bookTitle.value, authorName.value)">
     </div>
 
     <!-- by author -->
-    <div class="col-md-6 input-group">
+    <div class="col-md-5 input-group">
         <div class="input-group-prepend">
-            <h1 class="input-group-text bg-dark text-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Search by author &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            <h1 class="input-group-text bg-info text-light">By author</h1>
         </div>
-        <select #authorName
-                class="form-control"
-                (change)="bookSearch(bookTitle.value, authorName.value)">
+        <select #authorName class="form-control" (change)="bookSearch(bookTitle.value, authorName.value)">
             <option value=""></option>
-            <option
-                    *ngFor="let author of authors"
-                    value={{author.name}}>{{author.name}}
+            <option *ngFor="let author of authors" value={{author.name}}>{{author.name}}
             </option>
         </select>
     </div>
 </div>
 
-<table class="table ">
+
+
+<table class="table" *ngIf="listStyle">
     <thead class="thead-dark">
         <tr>
-            <th>Title</th>
+            <th class="red">Title</th>
+            <th>Cover</th>
             <th>ISBN</th>
             <th>Authors</th>
             <th>Genres</th>
@@ -44,53 +51,121 @@
     </thead>
     <tbody>
         <tr *ngFor="let book of books; even as isEven" [style.background-color]="isEven ? '#ddd' : '#eee'">
-            <td>
+            <td class="align-middle">
                 <a [routerLink]="['/book', book.id, 'view' ]">{{ book.title }}</a>
             </td>
-            <td>
+            <td class="align-middle text-center">
+                <img src="{{generateUrl(book.img)}}" height="100px;" class="rounded">
+            </td>
+            <td class="align-middle">
                 {{ book.isbn }}
             </td>
-            <td>
-               <span *ngFor="let author of book.authors; last as isLast">
+            <td class="align-middle">
+                <span *ngFor="let author of book.authors; last as isLast">
                     {{ isLast ? author.name : author.name + ", " }}
-               </span>
+                </span>
             </td>
-            <td>
+            <td class="align-middle">
                 <span *ngFor="let genre of book.genres; last as isLast">
                     {{ isLast ? genre.name : genre.name + ", " }}
                 </span>
             </td>
-            <td>
+            <td class="align-middle">
                 {{ book.quantity }}
             </td>
-            <td>
+            <td class="align-middle">
                 {{ book.price | currency:'EUR':'symbol' }}
             </td>
-            <td class="text-center">
-                <span
-                    *ngIf="isBookInBasket(book.id); else addToBasket"
-                    (click)="removeBookFromBasket(book.id)"
-                    class="text-danger"
-                    style="cursor:pointer"
-                    title="Remove from basket">
-                    <fa-icon [icon]="'cart-arrow-down'" size="lg"></fa-icon>
+            <td class="text-center align-middle">
+                <span *ngIf="isBookInBasket(book.id); else addToBasket" (click)="removeBookFromBasket(book.id)" class="text-danger"
+                    style="cursor:pointer" title="Remove from basket">
+                    <fa-icon [icon]="'cart-arrow-down'" size="2x"></fa-icon>
                 </span>
 
                 <ng-template #addToBasket>
-                    <span *ngIf="book.quantity > 0; else outOfstock"
-                        (click)="addBookToBasket(book.id)"
-                        class="text-success"
-                        style="cursor:pointer"
-                        title="Add to basket">
-                        <fa-icon [icon]="'cart-plus'" size="lg"></fa-icon>
+                    <span *ngIf="book.quantity > 0; else outOfstock" (click)="addBookToBasket(book.id)" class="text-success"
+                        style="cursor:pointer" title="Add to basket">
+                        <fa-icon [icon]="'cart-plus'" size="2x"></fa-icon>
                     </span>
 
                     <ng-template #outOfstock>
                         <span class="text-warning font-weight-bold">Out of stock</span>
                     </ng-template>
                 </ng-template>
-
             </td>
         </tr>
     </tbody>
 </table>
+
+<div class="d-flex
+            flex-row
+            justify-content-between
+            align-items-center
+            flex-wrap"
+    *ngIf="!listStyle">
+
+    <div style="width: 24%; min-width: 400px;  background-color: #f2f2f2"
+        class="d-flex flex-row p-4 mb-3 rounded destaque"
+        *ngFor="let book of books">
+
+        <!-- img -->
+        <a  [routerLink]="['/book', book.id, 'view' ]"
+            style="cursor: pointer">
+            <img src="{{generateUrl(book.img)}}" height="200px;" class="rounded zoom">
+        </a>
+
+
+        <div class="d-flex flex-column pl-3"
+             style="width: 100%">
+            <!-- title -->
+            <small class="m-1"><strong>Title:</strong> {{book.title}}</small>
+            <!-- isbn -->
+            <small class="m-1"><strong>ISBN:</strong> {{book.isbn}}</small>
+            <!-- authors -->
+            <small class="m-1">
+                <strong>Authors:</strong>
+                <span *ngFor="let author of book.authors; last as isLast">
+                    {{ isLast ? author.name : author.name + ", " }}
+                </span>
+            </small>
+            <!-- genres -->
+            <small class="m-1">
+                <strong>Genres:</strong>
+                <span *ngFor="let genre of book.genres; last as isLast">
+                    {{ isLast ? genre.name : genre.name + ", " }}
+                </span>
+            </small>
+            <!-- price -->
+            <small class="m-1">
+                <strong>Price:</strong>
+                <span> {{ book.price | currency:'EUR':'symbol' }}</span>
+            </small>
+
+            <br>
+
+            <span *ngIf="isBookInBasket(book.id); else addToBasket"
+                  (click)="removeBookFromBasket(book.id)"
+                  class="text-danger text-right"
+                  style="cursor:pointer"
+                  title="Remove from basket">
+
+                <fa-icon [icon]="'cart-arrow-down'" size="2x"></fa-icon>
+            </span>
+
+            <ng-template #addToBasket>
+                <span *ngIf="book.quantity > 0; else outOfstock"
+                    (click)="addBookToBasket(book.id)"
+                    class="text-success text-right"
+                    style="cursor:pointer"
+                    title="Add to basket">
+                    <fa-icon [icon]="'cart-plus'" size="2x"></fa-icon>
+                </span>
+
+                <ng-template #outOfstock>
+                    <span class="text-warning font-weight-bold text-right">Out of stock</span>
+                </ng-template>
+            </ng-template>
+
+        </div>
+    </div>
+</div>

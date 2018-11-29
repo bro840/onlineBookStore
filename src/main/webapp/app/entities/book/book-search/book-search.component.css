@@ -1,0 +1,17 @@
+.destaque {
+    border: 2px solid rgba(50,150,200,0.2);
+    transition: transform .2s; /* Animation */
+}
+
+.destaque:hover {
+    border: 2px solid #17a2b8;
+}
+
+
+.zoom {
+    transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+}

@@ -11,6 +11,7 @@ export interface IBook {
     saleDetails?: ISaleDetails[];
     authors?: IAuthor[];
     genres?: IGenre[];
+    img?: string;
 }
 
 export class Book implements IBook {
@@ -22,6 +23,7 @@ export class Book implements IBook {
         public price?: number,
         public saleDetails?: ISaleDetails[],
         public authors?: IAuthor[],
-        public genres?: IGenre[]
+        public genres?: IGenre[],
+        public img?: string
     ) {}
 }

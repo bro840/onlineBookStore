@@ -1,4 +1,5 @@
-import { Basket } from './shared/model/basket.model';
+import { SalesComponent } from './layouts/sales/sales.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from './layouts';
@@ -15,7 +16,16 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                 {
                     path: 'admin',
                     loadChildren: './admin/admin.module#BookStoreAdminModule'
-                }
+                },
+                {
+                    path: 'sales',
+                    component: SalesComponent,
+                    data: {
+                        authorities: ['ROLE_USER'],
+                        pageTitle: 'Sales'
+                    },
+                    canActivate: [UserRouteAccessService]
+                },
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }
         )
